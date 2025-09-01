@@ -1,5 +1,5 @@
-import { signInWithEmailAndPassword } from 'firebase/auth'
-import React, { useState } from 'react'
+import { sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth'
+import React, { useRef, useState } from 'react'
 import auth from './Firebase.config'
 import { Link } from 'react-router-dom'
 
@@ -7,6 +7,7 @@ export default function Login() {
     const [user, setuser] = useState()
     const [success, setsuccess] = useState('')
     const [error, seterror] = useState('')
+    const emailref = useRef(null)
 
     const hendleloginform = e => {
         e.preventDefault()
@@ -31,6 +32,23 @@ export default function Login() {
 
     }
 
+    const hendleforgetpassword = () => {
+
+        const email = emailref.current.value
+        if (!email) {
+            console.log('send email', email)
+            return
+        }
+
+        sendPasswordResetEmail(auth, email)
+            .then(() => {
+                alert('please check your email then reset password')
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
     return (
         <div>
 
@@ -48,10 +66,16 @@ export default function Login() {
                             <form onSubmit={hendleloginform}>
                                 <fieldset className="fieldset">
                                     <label className="label">Email</label>
-                                    <input name='email' type="email" className="input" placeholder="Email" />
+                                    <input
+                                        name='email'
+                                        type="email"
+                                        className="input"
+                                        placeholder="Email"
+                                        ref={emailref}
+                                    />
                                     <label className="label">Password</label>
                                     <input name='password' type="password" className="input" placeholder="Password" />
-                                    <div><a className="link link-hover">Forgot password?</a></div>
+                                    <div><a onClick={hendleforgetpassword} className="link link-hover">Forgot password?</a></div>
                                     <button className="btn btn-neutral mt-4">Login</button>
                                     {
                                         success && <p className='text-green-600 text-sm'>{success}</p>
@@ -59,7 +83,7 @@ export default function Login() {
                                     {
                                         error && <p className='text-red-600'>{error}</p>
                                     }
-                                    <p>New to our website? Please <Link  className='underline font-semibold' to='/register'>Register now</Link></p>
+                                    <p>New to our website? Please <Link className='underline font-semibold' to='/register'>Register now</Link></p>
                                 </fieldset>
                             </form>
                         </div>
