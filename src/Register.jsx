@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import auth from './Firebase.config'
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
 
 export default function Register() {
@@ -108,6 +109,7 @@ export default function Register() {
                                     {
                                         error && <p className='text-red-600'>{error}</p>
                                     }
+                                    <p>You have allredy an account? Please <link className='underline font-semibold' to='/login'>Login now</Link></p>
                                 </fieldset>
                             </form>
                         </div>

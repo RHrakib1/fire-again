@@ -1,6 +1,7 @@
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import React, { useState } from 'react'
 import auth from './Firebase.config'
+import { Link } from 'react-router-dom'
 
 export default function Login() {
     const [user, setuser] = useState()
@@ -58,6 +59,7 @@ export default function Login() {
                                     {
                                         error && <p className='text-red-600'>{error}</p>
                                     }
+                                    <p>New to our website? Please <Link  className='underline font-semibold' to='/register'>Register now</Link></p>
                                 </fieldset>
                             </form>
                         </div>
