@@ -103,10 +103,10 @@ export default function Register() {
                                     <button onClick={googleAuth} className="btn btn-neutral mt-4">Google With Regisster</button>
                                     <button onClick={googlesignout} className="btn btn-neutral mt-4">Google singout</button>
                                     {
-                                        success && <p>{success}</p>
+                                        success && <p className='text-green-600 text-sm'>{success}</p>
                                     }
                                     {
-                                        error && <p>{error}</p>
+                                        error && <p className='text-red-600'>{error}</p>
                                     }
                                 </fieldset>
                             </form>

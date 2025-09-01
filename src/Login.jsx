@@ -53,10 +53,10 @@ export default function Login() {
                                     <div><a className="link link-hover">Forgot password?</a></div>
                                     <button className="btn btn-neutral mt-4">Login</button>
                                     {
-                                        success && <p>{success}</p>
+                                        success && <p className='text-green-600 text-sm'>{success}</p>
                                     }
                                     {
-                                        error && <p>{error}</p>
+                                        error && <p className='text-red-600'>{error}</p>
                                     }
                                 </fieldset>
                             </form>
