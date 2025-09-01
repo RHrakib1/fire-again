@@ -43,15 +43,20 @@ export default function Register() {
         const sub = e.target
         const email = sub.email.value
         const password = sub.password.value
-        const obj = { email, password }
+        const terams = sub.terams.checked
+        const obj = { email, password, terams }
         console.log(obj)
 
         if (password.length < 6) {
             seterror('Password should be at least 6 characters')
             return
         }
-        if (!/[A-Z]/.test(password)) {
+        else if (!/[A-Z]/.test(password)) {
             seterror('please enter a minimun 1 largest alfabat')
+            return
+        }
+        else if (!terams) {
+            seterror('please accept our condition')
             return
         }
 
@@ -87,10 +92,13 @@ export default function Register() {
                                     <label className="label">Email</label>
                                     <input name='email' type="email" className="input" placeholder="Email" />
                                     <label className="label">Password</label>
-                                    <div className='flex gap-4 items-center'>
+                                    <div className='relative'>
                                         <input name='password' type={showpassword ? 'text' : 'password'} className="input" placeholder="Password" />
-                                        <span onClick={() => setshowpassword(!showpassword)}>{showpassword ? <FaEye /> : <FaEyeSlash />}</span>
+                                        <span className='absolute top-3 right-5.5 cursor-pointer' onClick={() => setshowpassword(!showpassword)}>{showpassword ? <FaEye /> : <FaEyeSlash />}</span><br /><br />
+                                        <input type="checkbox" name='terams' id="terms" />
+                                        <label className="ml-2">Accept our trems and condition</label>
                                     </div>
+
                                     <button type='submit' className="btn btn-neutral mt-4">Register</button>
                                     <button onClick={googleAuth} className="btn btn-neutral mt-4">Google With Regisster</button>
                                     <button onClick={googlesignout} className="btn btn-neutral mt-4">Google singout</button>
